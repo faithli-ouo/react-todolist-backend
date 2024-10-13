@@ -1,0 +1,51 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "c6d24c65-b29d-43a6-a7a7-d1c70db509e1",
+  "prevId": "b3ddd196-a33d-4fdc-b6c0-77190694b929",
+  "tables": {
+    "todolist": {
+      "name": "todolist",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {
+      "\"users_table\"": "\"todolist\""
+    },
+    "columns": {
+      "\"todolist\".\"age\"": "\"todolist\".\"status\""
+    }
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
