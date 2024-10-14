@@ -1,6 +1,6 @@
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-type todostatus = "undo" | "processing" | "finish";
+export type todostatus = "undo" | "processing" | "finish";
 
 export const todolist = sqliteTable("todolist", {
   id: int().primaryKey({ autoIncrement: true }),

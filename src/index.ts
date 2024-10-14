@@ -4,9 +4,19 @@ import { drizzle } from 'drizzle-orm/connect';
 import { db } from './db/db';
 import { insertTodo, todolist, todostatus } from './db/schema';
 import { eq } from 'drizzle-orm';
+import { cors } from 'hono/cors'
 
 
 const app = new Hono()
+
+
+app.use(
+  '*',
+  cors({
+    origin: ['http://localhost:4000'],
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+)
 
 app.get('/', async (c) => {
   const data = await (await db).select().from(todolist)
@@ -15,8 +25,7 @@ app.get('/', async (c) => {
 
 app.put('/:id',async (c) => {
   const item_id = Number(c.req.param("id"))
-  console.log(item_id);
-  
+
   if(!item_id){
     return c.text('Invalid ID', 400)
   }
@@ -36,7 +45,7 @@ app.put('/:id',async (c) => {
 
   const data:insertTodo = {name: name, status: status}
   
-  const res = (await db)
+  const res = await (await db)
   .update(todolist)
   .set(data)
   .where(eq(todolist.id,item_id))
@@ -68,12 +77,13 @@ app.post('/', async (c) => {
 })
 
 app.delete('/:id', async (c) => {
-  const item_id = Number(c.req.param('id'))
-  if(!item_id){
-    return c.text(`Unvalid ID`, 400)
+  const item_id = Number(c.req.param('id'));
+  if(!item_id || item_id < 0) {
+    return c.text('Invalid Item ID', 400)
   }
-  const res = (await db).delete(todolist).where(eq(todolist.id, item_id)).returning({id:todolist.id})
-  return c.text(`Delete Success`, 200)
+  const res = await (await db).delete(todolist).where(eq(todolist.id, item_id)).returning({deleteID: todolist.id});
+  
+  return c.text(`Delete Success ID: ${res[0].deleteID}`, 200)
 })
 
 

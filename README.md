@@ -1,16 +1,5 @@
-To install dependencies:
-```sh
-bun install
-```
+# React Vite TodoList MVC Backend
 
-To run:
-```sh
-bun run dev
-```
+This TodoList backend is build with Bun and Honojs.
 
-open http://localhost:3000
-
-
-Referenced Documents:
-1. Hono: https://hono.dev/
-2. Drizzle: https://orm.drizzle.team/docs/get-started/bun-sqlite-new (This is the starter guide for config the Drizzle and Bun SQLite)
+The CRUD function is based on DrizzleORM with SQLite.
