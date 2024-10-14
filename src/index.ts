@@ -9,11 +9,13 @@ import { cors } from 'hono/cors'
 
 const app = new Hono()
 
+const origin = process.env.ORIGIN!
+
 
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:4000'],
+    origin: origin,
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   })
 )

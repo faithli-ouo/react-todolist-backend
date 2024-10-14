@@ -4,3 +4,6 @@ node_modules/
 # Any .SQL file
 *.sql
 *.sqlite
+
+#
+*.env
